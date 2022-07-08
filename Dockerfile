@@ -1,10 +1,12 @@
 FROM bitnami/php-fpm:7.4.30-debian-11-r12
 
-# 安装变异软件
+# 安装编译软件
 RUN apt update && \
 	apt install -y autoconf && \
 	apt install -y build-essential && \
-	apt install -y libyaml
+	apt install -y libyaml-dev && \
+	apt install -y librdkafka-dev && \
+	apt install -y git
 
 # 安装扩展包
 RUN cd /app && \
@@ -38,7 +40,7 @@ RUN cd /app && \
 	./configure --prefix=/opt/bitnami/php --with-php-config=/opt/bitnami/php/bin/php-config && \
 	make && make install && \
 	echo '[rdkafka]' >> /opt/bitnami/php/etc/conf.d/rdkafka.ini && \
-	echo 'extension=rdkafka' >> /opt/bitnami/php/etc/conf.d/rdkafka.ini && \
+	echo 'extension=rdkafka' >> /opt/bitnami/php/etc/conf.d/rdkafka.ini
 
 # 删除软件包
 RUN cd /app && \
