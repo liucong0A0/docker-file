@@ -73,7 +73,7 @@ RUN cd /app && \
 	composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ && \
 	composer config -g github-oauth.github.com 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
 
-EXPOSE 9000 9003
+EXPOSE 80 8000 9000 9003
 
 WORKDIR /app
 
